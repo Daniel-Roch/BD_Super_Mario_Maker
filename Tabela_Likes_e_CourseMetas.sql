@@ -12,15 +12,21 @@ group by A.firstClear,A.id
 order by Sum(A.stars) desc
 limit 10;
 
--- Os 10 jogadores que receberam maior quantidade de curtidas
-SELECT B.id `NomeJogador`,B.image `ImagemJogador`, count(A.id) `QTA_de_Likes_recebido`, B.flag `País` FROM t5grupo4.likes A
+-- Os 10 jogadores (Todos os países) que receberam maior quantidade de curtidas;
+SELECT B.id `Nome_Jogador`,B.image `Imagem_Jogador`, count(A.id) `QTA_de_Likes_recebido`, B.flag `País` FROM t5grupo4.likes A
 INNER JOIN t5grupo4.player2 B 
 ON A.player = B.name
 group by A.player,B.id
 order by count(A.id) desc
 limit 10;
 
--- Alerta : Tabela quebra sistema
-SELECT A.catch,A.id,A.player FROM t5grupo4.likes A 
-INNER JOIN t5grupo4.`course-meta` B
-ON A.id = B.players group by A.catch,A.id,A.player Limit 10;
+-- Os 10 jogadores Brasileiros que receberam maior quantidade de curtidas;
+SELECT B.id `Nome_Jogador`,B.image `Imagem_Jogador`, count(A.id) `QTA_de_Likes_recebido`, B.flag `País` FROM t5grupo4.likes A
+INNER JOIN t5grupo4.player2 B 
+ON A.player = B.name
+group by A.player,B.id
+having B.flag = 'BR'
+order by count(A.id) desc
+limit 10;
+
+-- Fim
