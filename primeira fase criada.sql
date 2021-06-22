@@ -1,0 +1,1 @@
+select min(creation) `primeira fase criada` from courses;
